@@ -266,6 +266,7 @@ PSALMS = [
 
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
+tree = discord.app_commands.CommandTree(client)
 
 app = Flask(__name__)
 
@@ -293,8 +294,18 @@ async def send_psalm():
     )
     embed.set_footer(text=psalm["reference"])
 
-    await channel.send(embed=embed)
+    await channel.send(
+        content="@everyone",
+        embed=embed,
+        allowed_mentions=discord.AllowedMentions(everyone=True),
+    )
     print(f"[{datetime.now().strftime('%H:%M:%S')}] Sent psalm: {psalm['reference']}")
+
+@tree.command(name="test", description="Send a random psalm to the configured channel right now.")
+async def test_command(interaction: discord.Interaction):
+    await interaction.response.send_message("Sending a psalm now...", ephemeral=True)
+    await send_psalm()
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] /test used by {interaction.user}")
 
 def schedule_psalm():
     import asyncio
@@ -308,6 +319,9 @@ def schedule_psalm():
 async def on_ready():
     print(f"[{datetime.now().strftime('%H:%M:%S')}] Logged in as {client.user} (ID: {client.user.id})")
     print(f"[INFO] Psalms will be sent daily at 08:00 to channel ID {CHANNEL_ID}")
+
+    await tree.sync()
+    print("[INFO] Slash commands synced")
 
     scheduler_thread = threading.Thread(target=schedule_psalm, daemon=True)
     scheduler_thread.start()
