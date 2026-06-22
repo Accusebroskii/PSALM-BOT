@@ -329,6 +329,11 @@ async def on_ready():
     print(f"[{datetime.now().strftime('%H:%M:%S')}] Logged in as {client.user} (ID: {client.user.id})")
     print(f"[INFO] Psalms will be sent daily at 08:00 to channel ID {CHANNEL_ID}")
 
+    for guild in client.guilds:
+        print(f"[DEBUG] Channels visible in '{guild.name}':")
+        for ch in guild.text_channels:
+            print(f"  #{ch.name} — ID: {ch.id}")
+
     await tree.sync()
     print("[INFO] Slash commands synced")
 
