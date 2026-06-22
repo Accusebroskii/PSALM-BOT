@@ -4,11 +4,14 @@ import schedule
 import time
 import random
 import threading
+import aiohttp
 from flask import Flask
 from datetime import datetime
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "0"))
+
+prayer_requests = []
 
 PSALMS = [
     {
@@ -316,6 +319,111 @@ async def test_command(interaction: discord.Interaction):
     await interaction.response.send_message("Sending a psalm now...", ephemeral=True)
     await send_psalm()
     print(f"[{datetime.now().strftime('%H:%M:%S')}] /test used by {interaction.user}")
+
+@tree.command(name="psalm", description="Send a random psalm with @everyone to the configured channel immediately.")
+@discord.app_commands.default_permissions(administrator=True)
+async def psalm_command(interaction: discord.Interaction):
+    await interaction.response.send_message("Sending a psalm now...", ephemeral=True)
+    await send_psalm()
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] /psalm used by {interaction.user}")
+
+@tree.command(name="verse", description="Look up a specific Bible verse and post it to the configured channel.")
+@discord.app_commands.default_permissions(administrator=True)
+@discord.app_commands.describe(
+    book="Book of the Bible (e.g. John, Psalms, Romans)",
+    chapter="Chapter number",
+    verse="Verse number",
+)
+async def verse_command(interaction: discord.Interaction, book: str, chapter: int, verse: int):
+    await interaction.response.defer(ephemeral=True)
+    query = f"{book}+{chapter}:{verse}"
+    url = f"https://bible-api.com/{query}"
+
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, timeout=aiohttp.ClientTimeout(total=10)) as resp:
+                if resp.status != 200:
+                    await interaction.followup.send(f"❌ Verse not found. Check the book/chapter/verse and try again.", ephemeral=True)
+                    return
+                data = await resp.json()
+    except Exception as e:
+        await interaction.followup.send(f"❌ Failed to fetch verse: {e}", ephemeral=True)
+        return
+
+    text = data.get("text", "").strip()
+    reference = data.get("reference", f"{book} {chapter}:{verse}")
+
+    try:
+        channel = await client.fetch_channel(CHANNEL_ID)
+    except Exception as e:
+        await interaction.followup.send(f"❌ Could not reach the channel: {e}", ephemeral=True)
+        return
+
+    embed = discord.Embed(
+        title=reference,
+        description=text,
+        color=discord.Color.gold(),
+    )
+    embed.set_footer(text="bible-api.com")
+
+    await channel.send(
+        content="@everyone",
+        embed=embed,
+        allowed_mentions=discord.AllowedMentions(everyone=True),
+    )
+    await interaction.followup.send(f"✅ Posted **{reference}** to the channel.", ephemeral=True)
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] /verse {reference} posted by {interaction.user}")
+
+@tree.command(name="prayer", description="Submit a prayer request to the channel.")
+@discord.app_commands.default_permissions(administrator=True)
+@discord.app_commands.describe(request="Your prayer request")
+async def prayer_command(interaction: discord.Interaction, request: str):
+    prayer_requests.append({"user": str(interaction.user), "request": request})
+
+    try:
+        channel = await client.fetch_channel(CHANNEL_ID)
+    except Exception as e:
+        await interaction.response.send_message(f"❌ Could not reach the channel: {e}", ephemeral=True)
+        return
+
+    embed = discord.Embed(
+        title="🙏 Prayer Request",
+        description=request,
+        color=discord.Color.purple(),
+        timestamp=datetime.now(),
+    )
+    embed.set_footer(text=f"Submitted by {interaction.user.display_name}")
+
+    await channel.send(embed=embed)
+    await interaction.response.send_message("✅ Your prayer request has been posted.", ephemeral=True)
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] Prayer request from {interaction.user}")
+
+@tree.command(name="prayerlist", description="View all open prayer requests.")
+async def prayerlist_command(interaction: discord.Interaction):
+    if not prayer_requests:
+        await interaction.response.send_message("No prayer requests yet.", ephemeral=True)
+        return
+
+    lines = [f"**{i+1}.** {p['request']} *(from {p['user']})*" for i, p in enumerate(prayer_requests)]
+    embed = discord.Embed(
+        title="🙏 Open Prayer Requests",
+        description="\n\n".join(lines),
+        color=discord.Color.purple(),
+    )
+    embed.set_footer(text=f"{len(prayer_requests)} request(s) total")
+    await interaction.response.send_message(embed=embed, ephemeral=True)
+
+@tree.command(name="setpsalmchannel", description="Change the channel where psalms, verses, and prayers are posted.")
+@discord.app_commands.default_permissions(administrator=True)
+@discord.app_commands.describe(channel="The channel to send psalms and verses to")
+async def setpsalmchannel_command(interaction: discord.Interaction, channel: discord.TextChannel):
+    global CHANNEL_ID
+    CHANNEL_ID = channel.id
+    await interaction.response.send_message(
+        f"✅ Channel updated to {channel.mention}. All future psalms, verses, and prayers will be posted there.",
+        ephemeral=True,
+    )
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] Channel updated to #{channel.name} (ID: {channel.id}) by {interaction.user}")
 
 def schedule_psalm():
     import asyncio
