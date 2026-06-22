@@ -274,7 +274,7 @@ def home():
     return "Psalm Bot is alive!", 200
 
 def run_flask():
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=8000)
 
 async def send_psalm():
     await client.wait_until_ready()
@@ -322,6 +322,6 @@ if __name__ == "__main__":
 
     flask_thread = threading.Thread(target=run_flask, daemon=True)
     flask_thread.start()
-    print("[INFO] Keep-alive web server started on port 8080")
+    print("[INFO] Keep-alive web server started on port 8000")
 
     client.run(BOT_TOKEN)
