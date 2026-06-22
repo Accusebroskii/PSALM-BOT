@@ -284,8 +284,13 @@ async def send_psalm():
     except discord.NotFound:
         print(f"[ERROR] Channel ID {CHANNEL_ID} not found. Check your CHANNEL_ID secret.")
         return
-    except discord.Forbidden:
-        print(f"[ERROR] Bot does not have permission to access channel ID {CHANNEL_ID}.")
+    except discord.Forbidden as e:
+        print(f"[ERROR] Forbidden accessing channel {CHANNEL_ID}: {e.status} {e.text}")
+        guilds = [f"{g.name} (ID: {g.id})" for g in client.guilds]
+        print(f"[DEBUG] Bot is in these servers: {guilds if guilds else 'NONE — bot has not been added to any server!'}")
+        return
+    except Exception as e:
+        print(f"[ERROR] Unexpected error fetching channel: {type(e).__name__}: {e}")
         return
 
     psalm = random.choice(PSALMS)
