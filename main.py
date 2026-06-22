@@ -311,6 +311,7 @@ async def send_psalm():
     print(f"[{datetime.now().strftime('%H:%M:%S')}] Sent psalm: {psalm['reference']}")
 
 @tree.command(name="test", description="Send a random psalm to the configured channel right now.")
+@discord.app_commands.default_permissions(administrator=True)
 async def test_command(interaction: discord.Interaction):
     await interaction.response.send_message("Sending a psalm now...", ephemeral=True)
     await send_psalm()
