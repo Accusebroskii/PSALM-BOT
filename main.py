@@ -279,9 +279,13 @@ def run_flask():
 
 async def send_psalm():
     await client.wait_until_ready()
-    channel = client.get_channel(CHANNEL_ID)
-    if channel is None:
-        print(f"[ERROR] Could not find channel with ID {CHANNEL_ID}. Check your CHANNEL_ID secret.")
+    try:
+        channel = await client.fetch_channel(CHANNEL_ID)
+    except discord.NotFound:
+        print(f"[ERROR] Channel ID {CHANNEL_ID} not found. Check your CHANNEL_ID secret.")
+        return
+    except discord.Forbidden:
+        print(f"[ERROR] Bot does not have permission to access channel ID {CHANNEL_ID}.")
         return
 
     psalm = random.choice(PSALMS)
