@@ -278,7 +278,8 @@ def home():
     return "Psalm Bot is alive!", 200
 
 def run_flask():
-    app.run(host="0.0.0.0", port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host="0.0.0.0", port=port)
 
 async def send_psalm():
     await client.wait_until_ready()
