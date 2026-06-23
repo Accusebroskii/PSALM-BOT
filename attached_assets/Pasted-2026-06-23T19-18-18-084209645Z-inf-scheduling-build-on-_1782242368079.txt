@@ -1,0 +1,53 @@
+2026-06-23T19:18:18.084209645Z [inf]  scheduling build on Metal builder "production-builderv3-us-west1-s6x9"
+2026-06-23T19:18:18.838851005Z [inf]  unpacking archive
+2026-06-23T19:18:18.954267849Z [inf]  uploading snapshot
+2026-06-23T19:18:19.050655017Z [inf]  [internal] load build definition from Dockerfile
+2026-06-23T19:18:19.050656889Z [inf]  [internal] load build definition from Dockerfile
+2026-06-23T19:18:19.053369622Z [inf]  [internal] load build definition from Dockerfile
+2026-06-23T19:18:39.380418868Z [inf]  [internal] load build definition from Dockerfile
+2026-06-23T19:18:39.388616054Z [inf]  [internal] load metadata for docker.io/library/python:3.11-slim
+2026-06-23T19:18:39.567497777Z [inf]  [internal] load metadata for docker.io/library/python:3.11-slim
+2026-06-23T19:18:39.567816408Z [inf]  [internal] load .dockerignore
+2026-06-23T19:18:39.567885175Z [inf]  [internal] load .dockerignore
+2026-06-23T19:18:39.567987564Z [inf]  [internal] load .dockerignore
+2026-06-23T19:18:39.610849234Z [inf]  [internal] load .dockerignore
+2026-06-23T19:18:39.620039378Z [inf]  [6/6] COPY modmail.py .
+2026-06-23T19:18:39.620040246Z [inf]  [5/6] COPY main.py .
+2026-06-23T19:18:39.620040592Z [inf]  [4/6] RUN pip install --no-cache-dir -r requirements.txt
+2026-06-23T19:18:39.620042495Z [inf]  [3/6] COPY requirements.txt .
+2026-06-23T19:18:39.620043052Z [inf]  [internal] load build context
+2026-06-23T19:18:39.620043877Z [inf]  [2/6] WORKDIR /app
+2026-06-23T19:18:39.620044442Z [inf]  [1/6] FROM docker.io/library/python:3.11-slim@sha256:ae52c5bef62a6bdd42cd1e8dffef86b9cd284bde9427da79839de7a4b983e7ca
+2026-06-23T19:18:39.620107221Z [inf]  [1/6] FROM docker.io/library/python:3.11-slim@sha256:ae52c5bef62a6bdd42cd1e8dffef86b9cd284bde9427da79839de7a4b983e7ca
+2026-06-23T19:18:39.620108116Z [inf]  [internal] load build context
+2026-06-23T19:18:39.620778802Z [inf]  [internal] load build context
+2026-06-23T19:18:39.630125083Z [inf]  [1/6] FROM docker.io/library/python:3.11-slim@sha256:ae52c5bef62a6bdd42cd1e8dffef86b9cd284bde9427da79839de7a4b983e7ca
+2026-06-23T19:18:39.652622709Z [inf]  [internal] load build context
+2026-06-23T19:18:39.679172705Z [inf]  [2/6] WORKDIR /app
+2026-06-23T19:18:39.679277681Z [inf]  [3/6] COPY requirements.txt .
+2026-06-23T19:18:41.759898526Z [inf]  [3/6] COPY requirements.txt .
+2026-06-23T19:18:41.773241605Z [inf]  [4/6] RUN pip install --no-cache-dir -r requirements.txt
+2026-06-23T19:18:44.01588737Z [inf]  Collecting discord.py==2.3.2 (from -r requirements.txt (line 1))
+
+2026-06-23T19:18:44.058676562Z [inf]    Downloading discord.py-2.3.2-py3-none-any.whl.metadata (4.9 kB)
+
+2026-06-23T19:18:44.077516098Z [inf]  Collecting schedule==1.2.2 (from -r requirements.txt (line 2))
+
+2026-06-23T19:18:44.088143472Z [inf]    Downloading schedule-1.2.2-py3-none-any.whl.metadata (3.8 kB)
+
+2026-06-23T19:18:44.117104936Z [inf]  Collecting flask==3.1.1 (from -r requirements.txt (line 3))
+
+2026-06-23T19:18:44.126919238Z [inf]    Downloading flask-3.1.1-py3-none-any.whl.metadata (3.0 kB)
+
+2026-06-23T19:18:44.14787615Z [inf]  ERROR: Ignored the following versions that require a different python version: 0.1.0 Requires-Python >=3.13; 0.2.0 Requires-Python >=3.13; 0.2.1 Requires-Python >=3.13; 0.2.2 Requires-Python >=3.13
+
+2026-06-23T19:18:44.148016634Z [inf]  ERROR: Could not find a version that satisfies the requirement audioop-lts==0.2.1 (from versions: none)
+
+2026-06-23T19:18:44.148167797Z [inf]  ERROR: No matching distribution found for audioop-lts==0.2.1
+
+2026-06-23T19:18:44.221388282Z [inf]  
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: pip install --upgrade pip
+
+2026-06-23T19:18:44.346940549Z [err]  [4/6] RUN pip install --no-cache-dir -r requirements.txt
+2026-06-23T19:18:44.400826047Z [err]  Build Failed: build daemon returned an error < failed to solve: process "/bin/sh -c pip install --no-cache-dir -r requirements.txt" did not complete successfully: exit code: 1 >
