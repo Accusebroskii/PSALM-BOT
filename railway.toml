@@ -2,6 +2,9 @@
 builder = "nixpacks"
 buildCommand = "pip install -r requirements.txt"
 
+[build.nixpacksPlan.phases.setup]
+nixPkgs = ["python311"]
+
 [deploy]
 startCommand = "python main.py"
 restartPolicyType = "always"
