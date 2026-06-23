@@ -1,0 +1,117 @@
+Starting Container
+    import audioop
+ModuleNotFoundError: No module named 'audioop'
+  File "/app/.venv/lib/python3.13/site-packages/discord/client.py", line 51, in <module>
+    from .user import User, ClientUser
+  File "/app/.venv/lib/python3.13/site-packages/discord/user.py", line 29, in <module>
+Traceback (most recent call last):
+    import discord.abc
+  File "/app/main.py", line 2, in <module>
+  File "/app/.venv/lib/python3.13/site-packages/discord/abc.py", line 59, in <module>
+    import discord
+    from .voice_client import VoiceClient, VoiceProtocol
+  File "/app/.venv/lib/python3.13/site-packages/discord/__init__.py", line 23, in <module>
+  File "/app/.venv/lib/python3.13/site-packages/discord/voice_client.py", line 53, in <module>
+    from .client import *
+    from .player import AudioPlayer, AudioSource
+  File "/app/.venv/lib/python3.13/site-packages/discord/player.py", line 28, in <module>
+Traceback (most recent call last):
+  File "/app/main.py", line 2, in <module>
+    import discord
+  File "/app/.venv/lib/python3.13/site-packages/discord/__init__.py", line 23, in <module>
+    from .client import *
+  File "/app/.venv/lib/python3.13/site-packages/discord/client.py", line 51, in <module>
+    from .user import User, ClientUser
+  File "/app/.venv/lib/python3.13/site-packages/discord/user.py", line 29, in <module>
+    import discord.abc
+  File "/app/.venv/lib/python3.13/site-packages/discord/abc.py", line 59, in <module>
+    from .voice_client import VoiceClient, VoiceProtocol
+  File "/app/.venv/lib/python3.13/site-packages/discord/voice_client.py", line 53, in <module>
+    from .player import AudioPlayer, AudioSource
+  File "/app/.venv/lib/python3.13/site-packages/discord/player.py", line 28, in <module>
+    import audioop
+ModuleNotFoundError: No module named 'audioop'
+Traceback (most recent call last):
+  File "/app/main.py", line 2, in <module>
+    import discord
+  File "/app/.venv/lib/python3.13/site-packages/discord/__init__.py", line 23, in <module>
+    from .client import *
+  File "/app/.venv/lib/python3.13/site-packages/discord/client.py", line 51, in <module>
+    from .user import User, ClientUser
+  File "/app/.venv/lib/python3.13/site-packages/discord/user.py", line 29, in <module>
+    import discord.abc
+  File "/app/.venv/lib/python3.13/site-packages/discord/abc.py", line 59, in <module>
+    from .voice_client import VoiceClient, VoiceProtocol
+  File "/app/.venv/lib/python3.13/site-packages/discord/voice_client.py", line 53, in <module>
+    from .player import AudioPlayer, AudioSource
+  File "/app/.venv/lib/python3.13/site-packages/discord/player.py", line 28, in <module>
+    import audioop
+ModuleNotFoundError: No module named 'audioop'
+Traceback (most recent call last):
+  File "/app/main.py", line 2, in <module>
+    import audioop
+    import discord
+  File "/app/.venv/lib/python3.13/site-packages/discord/__init__.py", line 23, in <module>
+ModuleNotFoundError: No module named 'audioop'
+  File "/app/.venv/lib/python3.13/site-packages/discord/abc.py", line 59, in <module>
+    from .client import *
+  File "/app/.venv/lib/python3.13/site-packages/discord/client.py", line 51, in <module>
+    from .voice_client import VoiceClient, VoiceProtocol
+    from .user import User, ClientUser
+  File "/app/.venv/lib/python3.13/site-packages/discord/voice_client.py", line 53, in <module>
+  File "/app/.venv/lib/python3.13/site-packages/discord/user.py", line 29, in <module>
+    from .player import AudioPlayer, AudioSource
+    import discord.abc
+  File "/app/.venv/lib/python3.13/site-packages/discord/player.py", line 28, in <module>
+Traceback (most recent call last):
+  File "/app/main.py", line 2, in <module>
+    import discord
+  File "/app/.venv/lib/python3.13/site-packages/discord/__init__.py", line 23, in <module>
+    from .client import *
+  File "/app/.venv/lib/python3.13/site-packages/discord/client.py", line 51, in <module>
+    from .user import User, ClientUser
+  File "/app/.venv/lib/python3.13/site-packages/discord/user.py", line 29, in <module>
+    import discord.abc
+  File "/app/.venv/lib/python3.13/site-packages/discord/abc.py", line 59, in <module>
+    from .voice_client import VoiceClient, VoiceProtocol
+  File "/app/.venv/lib/python3.13/site-packages/discord/voice_client.py", line 53, in <module>
+    from .player import AudioPlayer, AudioSource
+  File "/app/.venv/lib/python3.13/site-packages/discord/player.py", line 28, in <module>
+    import audioop
+ModuleNotFoundError: No module named 'audioop'
+Traceback (most recent call last):
+  File "/app/main.py", line 2, in <module>
+    import discord
+  File "/app/.venv/lib/python3.13/site-packages/discord/__init__.py", line 23, in <module>
+    from .client import *
+  File "/app/.venv/lib/python3.13/site-packages/discord/client.py", line 51, in <module>
+    from .user import User, ClientUser
+  File "/app/.venv/lib/python3.13/site-packages/discord/user.py", line 29, in <module>
+    import discord.abc
+  File "/app/.venv/lib/python3.13/site-packages/discord/abc.py", line 59, in <module>
+    from .voice_client import VoiceClient, VoiceProtocol
+  File "/app/.venv/lib/python3.13/site-packages/discord/voice_client.py", line 53, in <module>
+    from .player import AudioPlayer, AudioSource
+  File "/app/.venv/lib/python3.13/site-packages/discord/player.py", line 28, in <module>
+    import audioop
+ModuleNotFoundError: No module named 'audioop'
+Traceback (most recent call last):
+  File "/app/main.py", line 2, in <module>
+    import discord
+  File "/app/.venv/lib/python3.13/site-packages/discord/__init__.py", line 23, in <module>
+    from .client import *
+  File "/app/.venv/lib/python3.13/site-packages/discord/client.py", line 51, in <module>
+    from .user import User, ClientUser
+  File "/app/.venv/lib/python3.13/site-packages/discord/user.py", line 29, in <module>
+    import discord.abc
+  File "/app/.venv/lib/python3.13/site-packages/discord/abc.py", line 59, in <module>
+    from .voice_client import VoiceClient, VoiceProtocol
+  File "/app/.venv/lib/python3.13/site-packages/discord/voice_client.py", line 53, in <module>
+    from .player import AudioPlayer, AudioSource
+  File "/app/.venv/lib/python3.13/site-packages/discord/player.py", line 28, in <module>
+    import audioop
+ModuleNotFoundError: No module named 'audioop'
+Traceback (most recent call last):
+    from .player import AudioPlayer, AudioSource
+  File "/app/main.py", line 2, in <module>
+    import discord
